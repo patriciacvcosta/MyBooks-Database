@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication.Data;
 using WebApplication.Models;
 
-namespace WebApplication.Pages.Movies
+namespace WebApplication.Pages.Books
 {
     public class DetailsModel : PageModel
     {
+
         private readonly AppDbContext _context;
 
         public DetailsModel(AppDbContext context)
@@ -19,18 +19,18 @@ namespace WebApplication.Pages.Movies
             _context = context;
         }
 
-        public Movie Movie { get; set; }
+        public Book Book { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Movie = await _context.Movie.FirstOrDefaultAsync(m => m.ID == id);
+            Book = _context.Books.FirstOrDefault(b => b.ID == id);
 
-            if (Movie == null)
+            if (Book == null)
             {
                 return NotFound();
             }

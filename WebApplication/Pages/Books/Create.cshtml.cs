@@ -4,17 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication.Data;
 using WebApplication.Models;
 
-namespace WebApplication.Pages.Movies
+namespace WebApplication.Pages.Books
 {
     public class CreateModel : PageModel
     {
-        private readonly AppDbContext _context;
 
-        public CreateModel(AppDbContext context)
+        private readonly AppDbContext _context; //used to query from a database and group together changes that will then be written back to the store as a unit.
+
+        public CreateModel(AppDbContext context) //Dependency injection
         {
             _context = context;
         }
@@ -25,17 +25,17 @@ namespace WebApplication.Pages.Movies
         }
 
         [BindProperty]
-        public Movie Movie { get; set; }
+        public Book Book { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Movie.Add(Movie);
-            await _context.SaveChangesAsync();
+            _context.Books.Add(Book);
+            _context.SaveChanges();
 
             return RedirectToPage("./Index");
         }

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication.Data;
 using WebApplication.Models;
 
-namespace WebApplication.Pages.Movies
+namespace WebApplication.Pages.Books
 {
     public class IndexModel : PageModel
     {
+
         private readonly AppDbContext _context;
 
         public IndexModel(AppDbContext context)
@@ -19,11 +19,11 @@ namespace WebApplication.Pages.Movies
             _context = context;
         }
 
-        public IList<Movie> Movie { get;set; }
+        public IList<Book> Books { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Movie = await _context.Movie.ToListAsync();
+            Books = _context.Books.ToList();
         }
     }
 }

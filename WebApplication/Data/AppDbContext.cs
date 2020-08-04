@@ -15,5 +15,6 @@ namespace WebApplication.Data
         }
 
         public DbSet<Movie> Movie { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }

@@ -4,53 +4,53 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication.Data;
 using WebApplication.Models;
 
-namespace WebApplication.Pages.Movies
+namespace WebApplication.Pages.Books
 {
     public class DeleteModel : PageModel
     {
         private readonly AppDbContext _context;
 
-        public DeleteModel(AppDbContext context)
+        public DeleteModel (AppDbContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Movie Movie { get; set; }
+        public Book Book { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
-            if (id == null)
+            if(id == null)
             {
                 return NotFound();
             }
 
-            Movie = await _context.Movie.FirstOrDefaultAsync(m => m.ID == id);
+            Book = _context.Books.FirstOrDefault(b => b.ID == id);
 
-            if (Movie == null)
+            if(Book == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Movie = await _context.Movie.FindAsync(id);
+            Book = _context.Books.Find(id);
 
-            if (Movie != null)
+            if (Book != null)
             {
-                _context.Movie.Remove(Movie);
-                await _context.SaveChangesAsync();
+                _context.Books.Remove(Book);
+                _context.SaveChanges();
             }
 
             return RedirectToPage("./Index");
