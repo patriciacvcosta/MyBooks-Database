@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Books List</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -108,16 +108,80 @@
 
 @*</div>*@
 
-<div class="card border-success mb-3" style="max-width: 18rem;">
-    <div class="card-header bg-transparent border-success">Header</div>
-    <div class="card-body text-success">
-        <h5 class="card-title">Success card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.Books)
+        {
+            <div class="col-md-4">
+                <div class="card border-secondary mb-3" style="max-width: 22rem; height: 24rem; box-shadow: 0 5px 5px gray;">
+                    <div class="card-header" style="padding-top: 0; padding-bottom:0; height: 60px;">
+
+                        @if (item.Title.Length > 40)
+                        {
+                            <h5 class="card-title" style="text-align: center; margin: 5px;">
+                                @item.Title.Substring(0, 40)...
+                            </h5>
+                        }
+                        else
+                        {
+                            <h5 class="card-title" style="text-align: center; margin: 5px;">
+                                @item.Title
+                            </h5>
+                        }
+                    </div>
+                    <div class="card-body text-secondary" style="padding: 10px; margin-top: 10px;">
+
+                        <img src="~/images/Dust_Lands.jpg" alt="Dust Lands" height="248" width="145" style="border: 2px solid #D3D3D3;
+                            float: left; margin-right: 20px">
+
+                        <dl style="padding-bottom: 0px;">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Books[0].Author)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Author)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Books[0].PublishDate)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.PublishDate)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Books[0].Genre)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Genre)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Books[0].NumerOfPages)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.NumerOfPages)
+                            </dd>
+                        </dl>
+
+                    </div>
+                    <div class="card-footer bg-transparent border-secondary" style="padding: 5px;">
+                        <div style="float: right; font-style: italic;">
+                            <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
     </div>
-    <div class="card-footer bg-transparent border-success">Footer</div>
+
 </div>
 
-<table class="table">
+
+
+
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -164,5 +228,5 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
 
