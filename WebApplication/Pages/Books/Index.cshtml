@@ -4,119 +4,28 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    .zoom {              
+        transition: transform .4s; 
+    }
+    .zoom:hover {
+        transform: scale(1.1);
+    }
+</style>
+
 <h2>Books List</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
 
-@*<div>
-    @foreach (var item in Model.Books)
-    {
-        <div class="col-md-6" style="width: 360px;  background-color: #F4F4F4; border: 2px outset gray;
-            border-radius: 4px; margin: 10px; box-shadow: 0 5px 5px gray; padding: 0px;">
-
-            <div>
-                <img src="~/images/Dust_Lands.jpg" alt="Dust Lands" height="248" width="140" style="/*border: 2px outset gray;*/
-                float: left; margin: 0 10px 0 0;">
-            </div>
-            <div style="font-size: 95%; margin-left: 7.5em;">
-                <div style="">
-                    <dl style="margin-top: 15px;">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Books[0].Title)
-                        </dt>
-
-                        @if (item.Title.Length > 28)
-                        {
-                            <dd>
-                                @item.Title.Substring(0, 28) ...
-                            </dd>
-                        }
-                        else
-                        {
-                            <dd>
-                                @item.Title
-                            </dd>
-                        }
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Books[0].Author)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(modelItem => item.Author)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Books[0].PublishDate)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(modelItem => item.PublishDate)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Books[0].Genre)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(modelItem => item.Genre)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Books[0].NumerOfPages)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(modelItem => item.NumerOfPages)
-                        </dd>
-                    </dl>
-                    <div style="float: right; margin-right: 10px">
-                        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                    </div>
-                </div>
-            </div>*@
-
-
-
-
-
-@*<div class="col-md-8">
-        <div class="card-body" style="margin-top: 2em;">
-            <h5 class="" style="">
-                @Html.DisplayNameFor(model => model.Books[0].Title) : @Html.DisplayFor(modelItem => item.Title)
-
-            </h5>
-            <h5 class="" style="">
-                @Html.DisplayNameFor(model => model.Books[0].Author) : @Html.DisplayFor(modelItem => item.Author)
-            </h5>
-            <h5 class="" style="">
-                @Html.DisplayNameFor(model => model.Books[0].PublishDate) : @Html.DisplayFor(modelItem => item.PublishDate)
-            </h5>
-            <h5 class="" style="">
-                @Html.DisplayNameFor(model => model.Books[0].Genre) : @Html.DisplayFor(modelItem => item.Genre)
-            </h5>
-            <h5 class="" style="">
-                @Html.DisplayNameFor(model => model.Books[0].NumerOfPages) : @Html.DisplayFor(modelItem => item.NumerOfPages)
-            </h5>
-            <div style="text-align: center; margin-top: 4em;">
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </div>
-        </div>
-    </div>*@
-
-@*</div>
-
-    }*@
-
-@*</div>*@
-
-
 <div class="container">
     <div class="row">
         @foreach (var item in Model.Books)
         {
             <div class="col-md-4">
-                <div class="card border-secondary mb-3" style="max-width: 22rem; height: 24rem; box-shadow: 0 5px 5px gray;">
+                <div class="card border-secondary zoom" style="max-width: 22rem; height: 24rem; box-shadow: 0 5px 5px gray; margin-bottom: 2em;">
                     <div class="card-header" style="padding-top: 0; padding-bottom:0; height: 60px;">
-
                         @if (item.Title.Length > 40)
                         {
                             <h5 class="card-title" style="text-align: center; margin: 5px;">
@@ -177,56 +86,3 @@
     </div>
 
 </div>
-
-
-
-
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Books[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Books[0].Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Books[0].PublishDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Books[0].Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Books[0].NumerOfPages)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Books)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublishDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumerOfPages)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@
-
