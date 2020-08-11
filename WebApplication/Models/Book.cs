@@ -29,6 +29,7 @@ namespace WebApplication.Models
         [Display(Name = "Numer Of Pages")]
         public int NumerOfPages { get; set; }
 
+        public byte[] Image { get; set; } //Byte array
 
 
     }

@@ -10,9 +10,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Book.ID"/>
+            <input type="hidden" asp-for="Book.ID" />
             <div class="form-group">
                 <label asp-for="Book.Title" class="control-label"></label>
                 <input asp-for="Book.Title" class="form-control" />
@@ -37,6 +37,14 @@
                 <label asp-for="Book.NumerOfPages" class="control-label"></label>
                 <input asp-for="Book.NumerOfPages" class="form-control" />
                 <span asp-validation-for="Book.NumerOfPages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Image" class="control-label"></label>
+                @if (Model.Book.Image != null && Model.Book.Image.Length > 0)
+                {
+                    <img src="@string.Format("data:image/png;base64, {0}", Convert.ToBase64String(Model.Book.Image))" height="150" />
+                }
+                <input type="file" accept="image/*" name="bookImage" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-outline-secondary" />

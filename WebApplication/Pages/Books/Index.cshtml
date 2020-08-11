@@ -5,12 +5,13 @@
 }
 
 <style>
-    .zoom {              
-        transition: transform .4s; 
+    .zoom {
+        transition: transform .4s;
     }
-    .zoom:hover {
-        transform: scale(1.1);
-    }
+
+        .zoom:hover {
+            transform: scale(1.1);
+        }
 </style>
 
 <h2>Books List</h2>
@@ -41,8 +42,15 @@
                     </div>
                     <div class="card-body text-secondary" style="padding: 10px; margin-top: 10px;">
 
-                        <img src="~/images/Dust_Lands.jpg" alt="Dust Lands" height="248" width="145" style="border: 2px solid #D3D3D3;
-                            float: left; margin-right: 20px">
+                        @if (item.Image != null && item.Image.Length > 0)
+                        {
+                            <img src="@string.Format("data:image/png;base64, {0}", Convert.ToBase64String(item.Image))" height="248" width="145" 
+                                 style="border: 2px solid #D3D3D3; float: left; margin-right: 20px">
+                        }
+                        else
+                        {
+                            <img src="~/images/not-found-image.jpg" height="248" width="145" style="border: 2px solid #D3D3D3; float: left; margin-right: 20px" />
+                        }
 
                         <dl style="padding-bottom: 0px;">
                             <dt>

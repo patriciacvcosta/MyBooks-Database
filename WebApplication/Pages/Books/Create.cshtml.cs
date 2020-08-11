@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication.Data;
+using WebApplication.Helpers;
 using WebApplication.Models;
 
 namespace WebApplication.Pages.Books
@@ -27,17 +29,20 @@ namespace WebApplication.Pages.Books
         [BindProperty]
         public Book Book { get; set; }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(IFormFile bookImage)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            Book.Image = ImageHelper.ConvertImageToByteArray(bookImage);    
+
             _context.Books.Add(Book);
             _context.SaveChanges();
 
             return RedirectToPage("./Index");
         }
+        
     }
 }

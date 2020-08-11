@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using WebApplication.Data;
+using WebApplication.Helpers;
 using WebApplication.Models;
 
 namespace WebApplication.Pages.Books
@@ -38,13 +40,14 @@ namespace WebApplication.Pages.Books
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(IFormFile bookImage)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            Book.Image = ImageHelper.ConvertImageToByteArray(bookImage);
             _context.Attach(Book).State = EntityState.Modified;
 
             try
