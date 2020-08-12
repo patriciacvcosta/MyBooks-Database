@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace WebApplication.Models
         public int NumerOfPages { get; set; }
 
         public byte[] Image { get; set; } //Byte array
+
+        public byte[] File { get; set; } 
 
 
     }

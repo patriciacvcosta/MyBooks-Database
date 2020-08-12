@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Helpers
 {
-    public class ImageHelper
+    public class FileHelper
     {
-        public static byte[] ConvertImageToByteArray(IFormFile bookImage)
+        public static byte[] ConvertFileToByteArray(IFormFile file)
         {
-            if (bookImage == null)
+            if (file == null)
             {
                 return null;
             }
 
-            byte[] imageBytes;
-            using (var reader = bookImage.OpenReadStream())
+            byte[] fileBytes;
+            using (var reader = file.OpenReadStream())
             {
-                imageBytes = new byte[reader.Length];
+                fileBytes = new byte[reader.Length];
                 for (int i = 0; i < reader.Length; i++)
                 {
-                    imageBytes[i] = (byte)reader.ReadByte();
+                    fileBytes[i] = (byte)reader.ReadByte();
                 }
             }
 
-            return imageBytes;
+            return fileBytes;
         }
     }
 }

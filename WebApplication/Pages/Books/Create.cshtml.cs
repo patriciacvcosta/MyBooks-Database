@@ -11,6 +11,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Pages.Books
 {
+    [RequestFormLimits(MultipartBodyLengthLimit = 268435456)]
     public class CreateModel : PageModel
     {
 
@@ -29,14 +30,15 @@ namespace WebApplication.Pages.Books
         [BindProperty]
         public Book Book { get; set; }
 
-        public IActionResult OnPost(IFormFile bookImage)
+        public IActionResult OnPost(IFormFile bookImage, IFormFile bookFile)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            Book.Image = ImageHelper.ConvertImageToByteArray(bookImage);    
+            Book.Image = FileHelper.ConvertFileToByteArray(bookImage);    
+            Book.File = FileHelper.ConvertFileToByteArray(bookFile);
 
             _context.Books.Add(Book);
             _context.SaveChanges();

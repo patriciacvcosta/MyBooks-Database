@@ -25,7 +25,7 @@
         @foreach (var item in Model.Books)
         {
             <div class="col-md-4">
-                <div class="card border-secondary zoom" style="max-width: 22rem; height: 24rem; box-shadow: 0 5px 5px gray; margin-bottom: 2em;">
+                <div class="card border-secondary zoom" style="max-width: 22rem; height: 30rem; box-shadow: 0 5px 5px gray; margin-bottom: 2em;">
                     <div class="card-header" style="padding-top: 0; padding-bottom:0; height: 60px;">
                         @if (item.Title.Length > 40)
                         {
@@ -44,7 +44,7 @@
 
                         @if (item.Image != null && item.Image.Length > 0)
                         {
-                            <img src="@string.Format("data:image/png;base64, {0}", Convert.ToBase64String(item.Image))" height="248" width="145" 
+                            <img src="@string.Format("data:image/png;base64, {0}", Convert.ToBase64String(item.Image))" height="248" width="145"
                                  style="border: 2px solid #D3D3D3; float: left; margin-right: 20px">
                         }
                         else
@@ -52,7 +52,7 @@
                             <img src="~/images/not-found-image.jpg" height="248" width="145" style="border: 2px solid #D3D3D3; float: left; margin-right: 20px" />
                         }
 
-                        <dl style="padding-bottom: 0px;">
+                        <dl style="padding-bottom: 0px; margin-left: 165px;">
                             <dt>
                                 @Html.DisplayNameFor(model => model.Books[0].Author)
                             </dt>
@@ -76,6 +76,28 @@
                             </dt>
                             <dd>
                                 @Html.DisplayFor(modelItem => item.NumerOfPages)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Books[0].File)
+                            </dt>
+                            <dd>
+                                @*@Html.DisplayFor(modelItem => item.NumerOfPages)*@
+                                @if (item.File != null && item.File.Length > 0)
+                                {
+
+                                    @*@Html.(IndexModel.DownloadFileFromDataBase(item.ID))*@
+
+
+                                    <object data="data:application/pdf;base64,@System.Convert.ToBase64String(item.File)" type="application/pdf" 
+                                            style="height:100px; width: 150px;">
+                                        @*<embed src="data:application/pdf;base64, @System.Convert.ToBase64String(item.File)" type="application/pdf" />*@
+                                    </object>
+                                }
+                                else
+                                {
+                                    <p>No file available...</p>
+                                }
+
                             </dd>
                         </dl>
 

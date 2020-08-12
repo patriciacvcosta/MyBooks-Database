@@ -43,8 +43,21 @@
                 @if (Model.Book.Image != null && Model.Book.Image.Length > 0)
                 {
                     <img src="@string.Format("data:image/png;base64, {0}", Convert.ToBase64String(Model.Book.Image))" height="150" />
+                    <input hidden asp-for="Book.Image" type="file" accept="image/*" class="form-control" />
+
                 }
-                <input type="file" accept="image/*" name="bookImage" class="form-control" />
+                    <input type="file" accept="image/*" name="bookImage" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.File" class="control-label"></label>
+                @if (Model.Book.File != null && Model.Book.File.Length > 0)
+                {
+                    <object data="data:application/pdf;base64,@System.Convert.ToBase64String(Model.Book.File)" type="application/pdf"
+                            style="height:100px; width: 150px;">
+                        @*<embed src="data:application/pdf;base64, @System.Convert.ToBase64String(item.File)" type="application/pdf" />*@
+                    </object>
+                }
+                <input type="file" accept="application/pdf" name="bookFile" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-outline-secondary" />

@@ -40,14 +40,25 @@ namespace WebApplication.Pages.Books
             return Page();
         }
 
-        public IActionResult OnPost(IFormFile bookImage)
+        public IActionResult OnPost(IFormFile bookImage, IFormFile bookFile)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            Book.Image = ImageHelper.ConvertImageToByteArray(bookImage);
+            if (bookImage != null)
+            {
+                Book.Image = FileHelper.ConvertFileToByteArray(bookImage);
+
+            }
+
+            if (bookFile != null)
+            {
+                Book.File = FileHelper.ConvertFileToByteArray(bookFile);
+
+            }
+
             _context.Attach(Book).State = EntityState.Modified;
 
             try
