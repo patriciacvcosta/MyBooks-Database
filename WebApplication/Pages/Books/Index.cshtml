@@ -25,7 +25,7 @@
         @foreach (var item in Model.Books)
         {
             <div class="col-md-4">
-                <div class="card border-secondary zoom" style="max-width: 22rem; height: 30rem; box-shadow: 0 5px 5px gray; margin-bottom: 2em;">
+                <div class="card border-secondary zoom" style="max-width: 22rem; height: 27rem; box-shadow: 0 5px 5px gray; margin-bottom: 2em;">
                     <div class="card-header" style="padding-top: 0; padding-bottom:0; height: 60px;">
                         @if (item.Title.Length > 40)
                         {
@@ -81,17 +81,16 @@
                                 @Html.DisplayNameFor(model => model.Books[0].File)
                             </dt>
                             <dd>
-                                @*@Html.DisplayFor(modelItem => item.NumerOfPages)*@
                                 @if (item.File != null && item.File.Length > 0)
                                 {
+                                    <form method="post" asp-page-handler="DownloadFileFromDataBase" asp-route-id="@item.ID">
+                                        <button type="submit">Download PDF</button>
 
-                                    @*@Html.(IndexModel.DownloadFileFromDataBase(item.ID))*@
+                                    </form>
 
-
-                                    <object data="data:application/pdf;base64,@System.Convert.ToBase64String(item.File)" type="application/pdf" 
-                                            style="height:100px; width: 150px;">
-                                        @*<embed src="data:application/pdf;base64, @System.Convert.ToBase64String(item.File)" type="application/pdf" />*@
-                                    </object>
+                                    @*<object data="data:application/pdf;base64,@System.Convert.ToBase64String(item.File)" type="application/pdf" 
+                                            style="height:100px; width: 150px;">                                        
+                                    </object>*@
                                 }
                                 else
                                 {

@@ -27,11 +27,13 @@ namespace WebApplication.Pages.Books
             Books = _context.Books.ToList();
         }
 
-        public FileStreamResult DownloadFileFromDataBase(int id)
+        public ActionResult OnPostDownloadFileFromDataBase(int id)
         {
             var _fileUpload = _context.Books.SingleOrDefault(aa => aa.ID == id);         // _fileUpload.FileContent type is byte
             MemoryStream ms = new MemoryStream(_fileUpload.File);
-            return new FileStreamResult(ms, "application/pdf");
+            //return new FileStreamResult(ms, "application/pdf");             opens the pdf in the same tab
+            return new FileStreamResult(ms, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");    //downloads the file
+
         }
     }
 }

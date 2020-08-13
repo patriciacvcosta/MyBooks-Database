@@ -47,17 +47,20 @@ namespace WebApplication.Pages.Books
                 return Page();
             }
 
+            Book bookBeforeEditting = _context.Books.AsNoTracking().FirstOrDefault(b => b.ID == Book.ID);
+
             if (bookImage != null)
             {
                 Book.Image = FileHelper.ConvertFileToByteArray(bookImage);
-
             }
-
-            if (bookFile != null)
+            else
             {
-                Book.File = FileHelper.ConvertFileToByteArray(bookFile);
-
+                Book.Image = bookBeforeEditting.Image;
             }
+
+            Book.File = bookFile != null 
+                ? FileHelper.ConvertFileToByteArray(bookFile) 
+                : bookBeforeEditting.File;
 
             _context.Attach(Book).State = EntityState.Modified;
 
